@@ -226,81 +226,19 @@
   <script>
     let cards = [];
 
-    async function loadCards() {
-      const response = await fetch('cards.txt');
-      const text = await response.text();
-
-      cards = text
-        .split('\n')
-        .filter(line => line.trim() !== '')
-        .map(line => {
-          const parts = line.split('|');
-
-          return {
-            palavra: parts[0]?.trim() || '',
-            frase: parts[1]?.trim() || ''
-          };
-        });
-
-      shuffledCards = [...cards].sort(() => Math.random() - 0.5);
-
-      renderCard();
-    }
-
-    const defaultCards = [
-
-    async function loadCards() {
-      const response = await fetch('cards.txt');
-      const text = await response.text();
-
-      cards = text
-        .split('\n')
-        .filter(line => line.trim() !== '')
-        .map(line => {
-          const parts = line.split('|');
-
-          return {
-            palavra: parts[0]?.trim() || '',
-            frase: parts[1]?.trim() || ''
-          };
-        });
-
-      shuffledCards = [...cards].sort(() => Math.random() - 0.5);
-
-      renderCard();
-    }
-
     const defaultCards = [
       {
         palavra: 'cachorro',
         frase: 'O cachorro correu para o parque.'
       },
       {
-        p ];
-
-    let currentIndex = 0;e: 'Elet shuffledCards = [];iz',
-        frase: 'Hoje eu estou muito feliz.'
-      },
-      {
-        palavra: 'trabalho',
-        frase: 'Meu trabalho começa às oito horas.'
-      },
-      {
-        palavra: 'estudar',
-        frase: 'Eu quero estudar Libras todos os dias.'
-      },
-      {
-        palavra: 'água',
-        frase: 'Preciso beber mais água.'
-      },
-      {
-        palavra: 'bom dia',
-        frase: 'Bom dia! Como você está?'
+        palavra: 'comer',
+        frase: 'Eu gosto de comer pizza.'
       }
-     ];
+    ];
 
     let currentIndex = 0;
-    
+    let shuffledCards = [];
     let knownCards = JSON.parse(localStorage.getItem('knownCards')) || [];
 
     const wordEl = document.getElementById('word');
@@ -309,6 +247,41 @@
     const knownCountEl = document.getElementById('knownCount');
     const remainingCountEl = document.getElementById('remainingCount');
     const vlibrasArea = document.getElementById('vlibrasArea');
+
+    async function loadCards() {
+      try {
+
+        const response = await fetch('./cards.txt');
+        const text = await response.text();
+
+        cards = text
+          .split('\n')
+          .filter(line => line.trim() !== '')
+          .map(line => {
+
+            const parts = line.split('|');
+
+            return {
+              palavra: parts[0]?.trim() || '',
+              frase: parts[1]?.trim() || parts[0]?.trim() || ''
+            };
+          });
+
+        if (cards.length === 0) {
+          cards = defaultCards;
+        }
+
+      } catch (error) {
+
+        console.error('Erro ao carregar cards.txt', error);
+
+        cards = defaultCards;
+      }
+
+      shuffledCards = [...cards].sort(() => Math.random() - 0.5);
+
+      renderCard();
+    }
 
     function renderCard() {
       const card = shuffledCards[currentIndex];
@@ -348,7 +321,7 @@
         knownCards.push(card.palavra);
       }
 
- loadCards();rage.setItem('knownCards', JSON.stringify(knownCards));
+      localStorage.setItem('knownCards', JSON.stringify(knownCards));
 
       knownCountEl.innerText = knownCards.length;
 
@@ -362,14 +335,13 @@
         shuffledCards = [...cards].sort(() => Math.random() - 0.5);
         currentIndex = 0;
 
-        alert('Todos os cards foram vistos 🎉
-A lista foi embaralhada novamente.');
+        alert('Todos os cards foram vistos 🎉');
       }
 
       renderCard();
     }
 
-  dEventListener('keydown', (event) => {
+    document.addEventListener('keydown', (event) => {
 
       if (event.code === 'Space') {
         event.preventDefault();
@@ -389,7 +361,7 @@ A lista foi embaralhada novamente.');
       }
     });
 
-    renderCard();
+    loadCards();
   </script>
 
   <div vw class="enabled">
