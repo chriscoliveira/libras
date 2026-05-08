@@ -1,84 +1,315 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Libras Flash Cards</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anki Libras</title>  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-  <header class="topo">
-    <h1>🤟 Libras</h1>
+    body {
+      background: #0f172a;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-    <div class="linha">
-      <label class="botao-upload">
-        📁 CSV local
-        <input type="file" id="csvLocal" accept=".csv" hidden>
-      </label>
+    .container {
+      width: 100%;
+      max-width: 700px;
+    }
 
-      <label for="filtroCategoria">Categoria:</label>
-      <select id="filtroCategoria"></select>
+    .title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-      <label for="modoJogo">Modo:</label>
-      <select id="modoJogo">
-        <option value="ambos">↔ Ambos</option>
-        <option value="pt_sinal">PT → Sinal</option>
-        <option value="sinal_pt">Sinal → PT</option>
-      </select>
+    .title h1 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
 
-      <label for="tamanhoBloco">Bloco:</label>
-      <select id="tamanhoBloco">
-        <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="50">50</option>
-        <option value="100" selected>100</option>
-      </select>
+    .title p {
+      color: #94a3b8;
+    }
 
-      <button id="btnNovoBloco" type="button">🧩 Novo</button>
-      <button id="btnEmbaralhar" type="button">🔀</button>
-      <button id="btnTema" type="button">🌙</button>
+    .card {
+      background: #1e293b;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .level {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #334155;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    .word {
+      font-size: 3rem;
+      margin: 50px 0 20px;
+      font-weight: bold;
+    }
+
+    .example {
+      color: #cbd5e1;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-weight: bold;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .show-btn {
+      background: #22c55e;
+      color: white;
+    }
+
+    .speak-btn {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .know-btn {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .next-btn {
+      background: #8b5cf6;
+      color: white;
+    }
+
+    .stats {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .vlibras-area {
+      margin-top: 20px;
+      padding: 18px;
+      background: #0f172a;
+      border-radius: 16px;
+      border: 1px solid #334155;
+    }
+
+    .tip {
+      margin-top: 18px;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    @media(max-width: 600px) {
+      .word {
+        font-size: 2.2rem;
+      }
+
+      .card {
+        padding: 28px;
+      }
+    }
+  </style></head>
+<body>  <div class="container"><div class="title">
+  <h1>🤟 Anki Libras</h1>
+  <p>Treine português → Libras usando VLibras</p>
+</div>
+
+<div class="card">
+
+  <div class="level" id="level">
+    Card 1
+  </div>
+
+  <div class="word" id="word">
+    cachorro
+  </div>
+
+  <div class="example" id="example">
+    O cachorro correu para o parque.
+  </div>
+
+  <div class="buttons">
+    <button class="show-btn" onclick="showVLibras()">
+      Mostrar Libras
+    </button>
+
+    <button class="speak-btn" onclick="speakText()">
+      Ouvir Texto
+    </button>
+
+    <button class="know-btn" onclick="markKnown()">
+      ✓ Eu sabia
+    </button>
+
+    <button class="next-btn" onclick="nextCard()">
+      Próximo Card
+    </button>
+  </div>
+
+  <div class="vlibras-area hidden" id="vlibrasArea">
+    <p>
+      Clique no botão azul do VLibras no canto inferior direito para traduzir.
+    </p>
+  </div>
+
+  <div class="tip">
+    💡 Dica: frases curtas funcionam melhor no VLibras do que palavras isoladas.
+  </div>
+
+</div>
+
+<div class="stats">
+  <div>
+    Acertos: <span id="knownCount">0</span>
+  </div>
+
+  <div>
+    Cards restantes: <span id="remainingCount">0</span>
+  </div>
+</div>
+
+  </div>  <script>
+    const cards = [
+      {
+        palavra: 'cachorro',
+        frase: 'O cachorro correu para o parque.'
+      },
+      {
+        palavra: 'comer',
+        frase: 'Eu gosto de comer pizza.'
+      },
+      {
+        palavra: 'feliz',
+        frase: 'Hoje eu estou muito feliz.'
+      },
+      {
+        palavra: 'trabalho',
+        frase: 'Meu trabalho começa às oito horas.'
+      },
+      {
+        palavra: 'estudar',
+        frase: 'Eu quero estudar Libras todos os dias.'
+      }
+    ];
+
+    let currentIndex = 0;
+    let knownCards = JSON.parse(localStorage.getItem('knownCards')) || [];
+
+    const wordEl = document.getElementById('word');
+    const exampleEl = document.getElementById('example');
+    const levelEl = document.getElementById('level');
+    const knownCountEl = document.getElementById('knownCount');
+    const remainingCountEl = document.getElementById('remainingCount');
+    const vlibrasArea = document.getElementById('vlibrasArea');
+
+    function renderCard() {
+      const card = cards[currentIndex];
+
+      wordEl.innerText = card.palavra;
+      exampleEl.innerText = card.frase;
+      levelEl.innerText = `Card ${currentIndex + 1}`;
+
+      knownCountEl.innerText = knownCards.length;
+      remainingCountEl.innerText = cards.length - currentIndex - 1;
+
+      vlibrasArea.classList.add('hidden');
+    }
+
+    function showVLibras() {
+      vlibrasArea.classList.remove('hidden');
+
+      alert(
+        'Agora clique no botão azul do VLibras no canto inferior direito para ver a tradução em Libras 🤟'
+      );
+    }
+
+    function speakText() {
+      const card = cards[currentIndex];
+
+      const utterance = new SpeechSynthesisUtterance(card.frase);
+
+      utterance.lang = 'pt-BR';
+
+      speechSynthesis.speak(utterance);
+    }
+
+    function markKnown() {
+      const card = cards[currentIndex];
+
+      if (!knownCards.includes(card.palavra)) {
+        knownCards.push(card.palavra);
+      }
+
+      localStorage.setItem('knownCards', JSON.stringify(knownCards));
+
+      knownCountEl.innerText = knownCards.length;
+
+      alert('Card salvo como conhecido 🚀');
+    }
+
+    function nextCard() {
+      currentIndex++;
+
+      if (currentIndex >= cards.length) {
+        currentIndex = 0;
+
+        alert('Você completou todos os cards 🎉');
+      }
+
+      renderCard();
+    }
+
+    renderCard();
+  </script>  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
     </div>
-
-    <div class="stats">
-      <div class="linha">
-        <strong>Sessão:</strong>
-        ✅ <span id="acertos">0</span>
-        ❌ <span id="erros">0</span>
-        📊 <span id="respondidos">0</span>/<span id="totalBloco">0</span>
-      </div>
-      <div class="linha">
-        <strong>Total histórico:</strong>
-        ✅ <span id="totalAcertosGlobal">0</span>
-        ❌ <span id="totalErrosGlobal">0</span>
-        | 📈 <span id="totalGlobal">0</span>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="categoria" id="categoriaAtual">Carregando...</div>
-    <div class="modo-badge" id="modoBadge"></div>
-
-    <div id="card" class="card" title="Clique para virar (ou aperte Espaço)">
-      <div id="conteudo" class="conteudo">Carregando...</div>
-      <div id="mediaArea" class="media-area"></div>
-    </div>
-
-    <div class="acoes">
-      <button id="btnVirar" type="button">👁 Mostrar resposta</button>
-    </div>
-
-    <div class="acoes">
-      <button id="btnAcerto" type="button" class="ok">✅ Acertei</button>
-      <button id="btnErro"   type="button" class="no">❌ Errei</button>
-    </div>
-
-    <p class="dica">Atalhos: <b>Espaço</b>=virar &nbsp; <b>A</b>=acerto &nbsp; <b>E</b>=erro</p>
-    <p class="dica">@christian.c3d</p>
-  </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script src="script.js"></script>
-</body>
+  </div>  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script></body>
 </html>
