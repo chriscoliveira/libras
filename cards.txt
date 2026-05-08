@@ -1,0 +1,201 @@
+cachorro | O cachorro correu para o parque.
+gato | O gato está dormindo no sofá.
+pássaro | O pássaro cantou de manhã cedo.
+peixe | O peixe nada no aquário.
+cavalo | O cavalo galopa no campo.
+vaca | A vaca come capim na fazenda.
+galinha | A galinha botou um ovo hoje.
+coelho | O coelho comeu a cenoura.
+elefante | O elefante é um animal enorme.
+leão | O leão rugiu na selva.
+mãe | Minha mãe faz um bolo delicioso.
+pai | Meu pai trabalha todos os dias.
+irmão | Meu irmão mora em outra cidade.
+irmã | Minha irmã estuda medicina.
+avó | A avó contou uma história linda.
+avô | O avô ensinou a pescar.
+filho | Meu filho tem cinco anos.
+filha | A filha da vizinha é muito simpática.
+tio | O tio trouxe um presente para mim.
+prima | Minha prima vai me visitar no fim de semana.
+vermelho | A maçã vermelha é muito doce.
+azul | O céu está bem azul hoje.
+verde | A grama está verde depois da chuva.
+amarelo | O sol tem a cor amarela.
+branco | O papel está em branco.
+preto | O gato preto pulou o muro.
+rosa | Ela ganhou flores rosas no aniversário.
+laranja | A laranja é uma fruta cítrica.
+roxo | O vestido roxo ficou muito bonito.
+marrom | O chocolate tem cor marrom.
+um | Eu tenho um irmão.
+dois | Ela tem dois filhos.
+três | Comprei três maçãs na feira.
+quatro | A mesa tem quatro cadeiras.
+cinco | O jogo começa às cinco horas.
+seis | Faltam seis dias para o feriado.
+sete | A semana tem sete dias.
+oito | Eu durmo oito horas por noite.
+nove | Ele tem nove anos de idade.
+dez | A prova vale dez pontos.
+segunda-feira | Na segunda-feira tenho reunião.
+terça-feira | Na terça-feira vou ao médico.
+quarta-feira | Na quarta-feira tem aula de dança.
+quinta-feira | Quinta-feira é dia de feira livre.
+sexta-feira | Na sexta-feira saímos para jantar.
+sábado | No sábado limpamos a casa.
+domingo | No domingo a família almoça junto.
+janeiro | Janeiro é um mês muito quente.
+fevereiro | Em fevereiro tem carnaval no Brasil.
+março | Em março as aulas recomeçam.
+abril | Abril tem o dia de Páscoa.
+maio | Maio é o mês das mães.
+junho | Em junho tem festa junina.
+julho | Julho é mês de férias escolares.
+agosto | Em agosto os dias ficam mais frescos.
+setembro | Setembro é o mês da Independência.
+outubro | Em outubro tem o dia das crianças.
+novembro | Novembro tem o dia da consciência negra.
+dezembro | Em dezembro celebramos o Natal.
+arroz | O arroz com feijão é muito gostoso.
+feijão | Feijão é rico em proteína.
+pão | Comprei pão fresco na padaria.
+leite | Eu bebo leite todo dia de manhã.
+ovo | O ovo mexido ficou saboroso.
+frango | O frango assado cheirou muito bem.
+carne | A carne foi grelhada no almoço.
+macarrão | O macarrão ficou al dente.
+salada | A salada é saudável e refrescante.
+fruta | Comer fruta faz bem para a saúde.
+banana | A banana é rica em potássio.
+laranja | Espremei laranjas para fazer suco.
+maçã | A maçã vermelha é minha favorita.
+uva | Comprei um cacho de uva na feira.
+melancia | A melancia é perfeita no verão.
+sorvete | O sorvete de chocolate é delicioso.
+bolo | O bolo de cenoura ficou fofo.
+biscoito | Comi biscoito com café da tarde.
+queijo | O queijo derreteu na torrada.
+manteiga | Passei manteiga no pão quentinho.
+água | Preciso beber mais água todo dia.
+suco | O suco de laranja é muito refrescante.
+café | Tomei café pela manhã antes de sair.
+chá | O chá de camomila acalma os nervos.
+leite | O leite gelado é ótimo no verão.
+refrigerante | Prefiro não beber refrigerante todo dia.
+casa | Cheguei em casa cansado do trabalho.
+escola | As crianças foram para a escola.
+mercado | Preciso ir ao mercado comprar comida.
+hospital | O médico trabalha no hospital.
+parque | Fomos ao parque no fim de semana.
+praia | A praia estava cheia no verão.
+banco | Fui ao banco pagar uma conta.
+farmácia | Comprei o remédio na farmácia.
+restaurante | Jantamos em um restaurante italiano.
+igreja | A missa começa às dez da manhã.
+aeroporto | Chegamos ao aeroporto com antecedência.
+supermercado | O supermercado está perto de casa.
+médico | O médico receitou o remédio certo.
+professora | A professora explicou a matéria bem.
+enfermeiro | O enfermeiro cuidou do paciente.
+engenheiro | O engenheiro projetou a ponte.
+advogada | A advogada defendeu o cliente.
+motorista | O motorista dirigiu com cuidado.
+cozinheiro | O cozinheiro preparou um prato especial.
+bombeiro | O bombeiro apagou o incêndio.
+policial | O policial ajudou o cidadão perdido.
+arquiteta | A arquiteta desenhou a planta da casa.
+feliz | Hoje eu estou muito feliz.
+triste | Ela ficou triste com a notícia.
+com raiva | Ele ficou com raiva do resultado.
+com medo | A criança ficou com medo do trovão.
+surpreso | Fiquei surpreso com o presente.
+cansado | Estou muito cansado depois do trabalho.
+animado | Estou animado para a viagem.
+nervoso | Fiquei nervoso antes da apresentação.
+tranquilo | O ambiente estava muito tranquilo.
+preocupado | Estou preocupado com a saúde dele.
+comer | Eu gosto de comer pizza.
+beber | Você precisa beber mais água.
+dormir | Eu preciso dormir mais cedo.
+acordar | Acordo às seis da manhã todo dia.
+trabalhar | Ela trabalha em uma empresa grande.
+estudar | Ele estuda todos os dias à noite.
+jogar | As crianças gostam de jogar futebol.
+correr | Corro três vezes por semana.
+cozinhar | Ele cozinha muito bem.
+limpar | Vou limpar a casa no sábado.
+comprar | Preciso comprar mantimentos.
+vender | Ela vende roupas pela internet.
+ajudar | Sempre ajudo meus amigos.
+falar | Você fala muito bem o português.
+ouvir | Gosto de ouvir música enquanto trabalho.
+ver | Vamos ver um filme hoje à noite.
+ler | Leio um livro antes de dormir.
+escrever | Ele escreve muito bem.
+andar | Gosto de andar no parque pela manhã.
+dirigir | Ela aprendeu a dirigir com o pai.
+bom dia | Bom dia! Como você está?
+boa tarde | Boa tarde! Tudo bem por aí?
+boa noite | Boa noite! Que você durma bem.
+olá | Olá! Muito prazer em te conhecer.
+tchau | Tchau! Até a próxima vez.
+obrigado | Obrigado pela sua ajuda de ontem.
+por favor | Por favor, me passa o sal?
+desculpe | Desculpe o atraso, o trânsito estava ruim.
+com licença | Com licença, posso passar?
+de nada | De nada, foi um prazer ajudar.
+tudo bem? | Tudo bem? Faz tempo que não nos vemos.
+sim | Sim, eu aceito o convite.
+não | Não consigo ir hoje infelizmente.
+talvez | Talvez eu vá à festa amanhã.
+ajuda | Preciso de ajuda com essa tarefa.
+cama | A cama está com lençol limpo.
+cadeira | A cadeira da sala está quebrada.
+mesa | A mesa do jantar é de madeira.
+sofá | O sofá novo ficou confortável.
+televisão | A televisão ficou ligada a noite toda.
+geladeira | A geladeira está cheia de comida.
+fogão | O fogão está com o gás acabando.
+banheiro | O banheiro foi reformado recentemente.
+cozinha | A cozinha cheirava bem com o almoço.
+janela | A janela estava aberta para ventilação.
+porta | A porta de entrada precisa de pintura.
+chave | Esqueci a chave dentro de casa.
+celular | O celular ficou sem bateria.
+computador | O computador demorou para ligar hoje.
+livro | Estou lendo um livro muito interessante.
+mochila | A mochila da escola estava muito pesada.
+sol | O sol está forte hoje à tarde.
+chuva | A chuva refrescou a cidade.
+vento | O vento derrubou as folhas das árvores.
+frio | Está muito frio hoje, preciso de casaco.
+calor | Que calor! Vou ligar o ventilador.
+nublado | O céu está nublado, pode chover.
+tempestade | A tempestade assustou as crianças.
+arco-íris | O arco-íris apareceu depois da chuva.
+dor de cabeça | Estou com dor de cabeça desde cedo.
+febre | A criança está com febre alta.
+remédio | Tomei o remédio depois do almoço.
+médico | Fui ao médico verificar a pressão.
+hospital | Ele ficou internado no hospital.
+consulta | Marquei uma consulta para sexta-feira.
+saúde | Cuidar da saúde é muito importante.
+exercício | Fazer exercício faz bem para o corpo.
+dormir bem | Dormir bem melhora o humor do dia.
+beber água | Lembre de beber água durante o dia.
+como vai você? | Como vai você? Está bem?
+estou bem | Estou bem, obrigado por perguntar.
+preciso de ajuda | Preciso de ajuda para carregar isso.
+não entendi | Não entendi, pode repetir por favor?
+pode falar mais devagar? | Pode falar mais devagar, por favor?
+qual é o seu nome? | Qual é o seu nome?
+meu nome é... | Meu nome é Ana, muito prazer.
+quanto custa? | Quanto custa esse produto?
+onde fica o banheiro? | Onde fica o banheiro, por favor?
+que horas são? | Que horas são agora?
+estou com fome | Estou com fome, vamos almoçar?
+estou com sede | Estou com sede, tem água?
+que dia é hoje? | Que dia é hoje da semana?
+até logo | Até logo! Te vejo mais tarde.
+com saudade | Estou com saudade da minha família.
