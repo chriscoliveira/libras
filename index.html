@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Flashcards Libras</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
+
+    body{
+      background:#0f172a;
+      color:white;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+
+    .app{
+      width:100%;
+      max-width:750px;
+    }
+
+    .header{
+      text-align:center;
+      margin-bottom:25px;
+    }
+
+    .header h1{
+      font-size:2.5rem;
+      margin-bottom:8px;
+    }
+
+    .header p{
+      color:#94a3b8;
+    }
+
+    .card{
+      background:#1e293b;
+      border-radius:28px;
+      padding:35px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .counter{
+      background:#334155;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:.95rem;
+    }
+
+    .category{
+      background:#1d4ed8;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:.95rem;
+    }
+
+    .word{
+      text-align:center;
+      font-size:3rem;
+      font-weight:bold;
+      margin-top:10px;
+      margin-bottom:25px;
+    }
+
+    .gif-container{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin-bottom:25px;
+      min-height:260px;
+      background:#0f172a;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid #334155;
+    }
+
+    .gif-container img{
+      max-width:100%;
+      max-height:260px;
+      object-fit:contain;
+    }
+
+    .sentence{
+      text-align:center;
+      font-size:1.1rem;
+      line-height:1.6;
+      color:#cbd5e1;
+      margin-bottom:25px;
+    }
+
+    .buttons{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+    }
+
+    button{
+      border:none;
+      border-radius:16px;
+      padding:16px;
+      cursor:pointer;
+      font-size:1rem;
+      font-weight:bold;
+      transition:.2s;
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+      opacity:.95;
+    }
+
+    .speak{
+      background:#2563eb;
+      color:white;
+    }
+
+    .shuffle{
+      background:#9333ea;
+      color:white;
+    }
+
+    .known{
+      background:#16a34a;
+      color:white;
+    }
+
+    .next{
+      background:#ea580c;
+      color:white;
+    }
+
+    .stats{
+      margin-top:20px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      color:#94a3b8;
+    }
+
+    .loading{
+      text-align:center;
+      padding:40px;
+      color:#94a3b8;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:18px;
+      color:#64748b;
+      font-size:.9rem;
+      line-height:1.5;
+    }
+
+    @media(max-width:600px){
+
+      .word{
+        font-size:2.1rem;
+      }
+
+      .card{
+        padding:24px;
+      }
+
+      .gif-container{
+        min-height:200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <h1>🤟 Flashcards Libras</h1>
+    <p>CSV + GIF + GitHub Pages</p>
+  </div>
+
+  <div class="card">
+
+    <div class="top">
+      <div class="counter" id="counter">
+        Card 1
+      </div>
+
+      <div class="category" id="category">
+        categoria
+      </div>
+    </div>
+
+    <div class="word" id="word">
+      Carregando...
+    </div>
+
+    <div class="gif-container">
+      <img id="gif" src="" alt="GIF Libras">
+    </div>
+
+    <div class="sentence" id="sentence">
+      ...
+    </div>
+
+    <div class="buttons">
+
+      <button class="speak" onclick="speakSentence()">
+        🔊 Ouvir
+      </button>
+
+      <button class="shuffle" onclick="shuffleCards()">
+        🔀 Embaralhar
+      </button>
+
+      <button class="known" onclick="markKnown()">
+        ✅ Eu sabia
+      </button>
+
+      <button class="next" onclick="nextCard()">
+        ➡ Próximo
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="stats">
+    <div>
+      Conhecidos: <span id="knownCount">0</span>
+    </div>
+
+    <div>
+      Total: <span id="totalCount">0</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    Edite apenas o arquivo cards.csv e envie novos GIFs 🚀
+  </div>
+
+</div>
+
+<script>
+
+let cards = [];
+let currentIndex = 0;
+
+let knownCards =
+  JSON.parse(localStorage.getItem("knownCards")) || [];
+
+async function loadCSV(){
+
+  try{
+
+    const response = await fetch("cards.csv");
+
+    const data = await response.text();
+
+    parseCSV(data);
+
+    renderCard();
+
+  }catch(error){
+
+    document.getElementById("word").innerText =
+      "Erro ao carregar cards.csv";
+
+    console.error(error);
+  }
+}
+
+function parseCSV(data){
+
+  const lines = data.trim().split("\\n");
+
+  const headers = lines[0].split(",");
+
+  cards = [];
+
+  for(let i = 1; i < lines.length; i++){
+
+    const row = lines[i].split(",");
+
+    let card = {};
+
+    headers.forEach((header,index)=>{
+
+      card[header.trim()] = row[index]?.trim();
+
+    });
+
+    cards.push(card);
+  }
+
+  document.getElementById("totalCount").innerText =
+    cards.length;
+
+  updateKnownCount();
+}
+
+function renderCard(){
+
+  if(cards.length === 0) return;
+
+  const card = cards[currentIndex];
+
+  document.getElementById("word").innerText =
+    card.palavra;
+
+  document.getElementById("sentence").innerText =
+    card.frase;
+
+  document.getElementById("gif").src =
+    card.gif;
+
+  document.getElementById("category").innerText =
+    card.categoria || "geral";
+
+  document.getElementById("counter").innerText =
+    `Card ${currentIndex + 1} de ${cards.length}`;
+}
+
+function nextCard(){
+
+  currentIndex++;
+
+  if(currentIndex >= cards.length){
+
+    currentIndex = 0;
+
+    alert("Você completou todos os cards 🎉");
+  }
+
+  renderCard();
+}
+
+function shuffleCards(){
+
+  for(let i = cards.length -1; i > 0; i--){
+
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [cards[i], cards[j]] =
+    [cards[j], cards[i]];
+  }
+
+  currentIndex = 0;
+
+  renderCard();
+
+  alert("Cards embaralhados 🔀");
+}
+
+function speakSentence(){
+
+  const card = cards[currentIndex];
+
+  const utterance =
+    new SpeechSynthesisUtterance(card.frase);
+
+  utterance.lang = "pt-BR";
+
+  speechSynthesis.speak(utterance);
+}
+
+function markKnown(){
+
+  const card = cards[currentIndex];
+
+  if(!knownCards.includes(card.palavra)){
+
+    knownCards.push(card.palavra);
+
+    localStorage.setItem(
+      "knownCards",
+      JSON.stringify(knownCards)
+    );
+
+    updateKnownCount();
+
+    alert("Card salvo como conhecido ✅");
+  }
+}
+
+function updateKnownCount(){
+
+  document.getElementById("knownCount").innerText =
+    knownCards.length;
+}
+
+loadCSV();
+
+</script>
+
+</body>
+</html>
